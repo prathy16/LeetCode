@@ -18,6 +18,12 @@ Explanation: 342 + 465 = 807.
 #         self.val = x
 #         self.next = None
 
+# Definition for singly-linked list.
+# class ListNode(object):
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
 class Solution(object):
     def addTwoNumbers(self, l1, l2):
         """
@@ -25,35 +31,33 @@ class Solution(object):
         :type l2: ListNode
         :rtype: ListNode
         """
-        temp1, temp2 = l1, l2
-        temp3, l3 = None, None
+        ll = None
         num1, num2 = [], []
         rev_num1, rev_num2 = 0, 0
         
         # Traverse through the LL to get list of digits
+        temp1 = l1
         while(temp1):
             num1.append(temp1.val)
             temp1 = temp1.next
-        while(temp2):
-            num2.append(temp2.val)
-            temp2 = temp2.next
+        temp1 = l2
+        while(temp1):
+            num2.append(temp1.val)
+            temp1 = temp1.next
             
-        # convert the list of digits into integer numbers
-        rev_num1, rev_num2 = int(''.join(str(i) for i in num1[::-1])), int(''.join(str(i) for i in num2[::-1])) 
-        
-        # Add both the numbers
-        num = rev_num1+ rev_num2
-        str_num = str(num)
+        # convert the list of digits into integer numbers and sum them up
+        str_num = str(int(''.join(str(i) for i in num1[::-1])) + int(''.join(str(i) for i in num2[::-1]))) 
+
         list_digits = [int(x) for x in str_num]
         
         # traverse through each digit of the summation of numbers and insert a new node into LL
+        temp = ll
         for digit in list_digits[::-1]:
-            if(l3 == None):
-                l3 = ListNode(int(digit))
-                temp3 = l3
+            if(ll == None):
+                ll = ListNode(int(digit))
+                temp = ll
             else:
-                temp_temp3 = ListNode(int(digit))
-                temp3.next = temp_temp3
-                temp3 = temp_temp3
-        return l3
+                temp.next = ListNode(int(digit))
+                temp = temp.next
+        return ll
                 
