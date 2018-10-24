@@ -21,14 +21,19 @@ class Solution(object):
         """
         fruit_count, start = 0, 0
         baskets = collections.Counter()
-        
+        # Keep sliding the window towards the right until you just 2 types of fruits. 
+        # When we encounter 3rd type of fruit then we keep sliding our left window until
+        # our baskets counter accomodates just 2 types of fruits
         for ind, fruit_type in enumerate(tree):
             baskets[fruit_type] += 1
+            
             while(len(baskets) == 3):
                 baskets[tree[start]] -= 1
                 if(baskets[tree[start]] == 0):
                     del baskets[tree[start]]
                 start += 1
+            
+            # fruit_count stores the max fruits collected
             fruit_count = max(fruit_count, ind-start+1)
             
         return fruit_count
