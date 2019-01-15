@@ -1,3 +1,3 @@
 # LeetCode
 
-Problems implemeted in python 3 and c++
+My solutions to leetcode problems in python 3 and c++
